@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="patient-card">
+        <h4><%= patient.name %></h4>
+        <p>Kor: <%= patient.age %></p>
+        <p>Neme: <%= patient.gender %></p>
+        
+        <div class="btn-container" style="width: 100%;">
+            <!-- Edit button -->
+            <form action="/patients/edit/<%= patient._id %>" method="GET">
+                <button type="submit">Szerkesztés</button>
+            </form>
+    
+            <!-- Delete button -->
+            <form action="/patients/delete/<%= patient._id %>" method="POST">
+                <button type="submit" onclick="return confirm('Biztosan törölni szeretnéd ezt a pácienst?');">
+                    Törlés
+                </button>
+            </form>
+        </div>
+    </div>
+    
+</body>
+</html>

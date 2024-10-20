@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="patient-main">
+        <div class="form-sections">
+            <h4>
+                <% if (selectedPatient) { %>
+                    Páciens szerkesztése
+                <% } else { %>
+                    Új páciens felvétele
+                <% } %>
+            </h4>
+            <form action="<%= selectedPatient ? '/patients/update/' + selectedPatient._id : '/patients/add' %>" method="POST">
+                <label>Név: </label>
+                <input type="text" name="name" 
+                    value="<%= selectedPatient ? selectedPatient.name : '' %>" required />
+                <br />
+                <label>Kor: </label>
+                <input type="number" name="age" 
+                    value="<%= selectedPatient ? selectedPatient.age : '' %>" required />
+                <br />
+                <label>Neme: </label>
+                <input type="text" name="gender" 
+                    value="<%= selectedPatient ? selectedPatient.gender : '' %>" required />
+                <br />
+                <button type="submit">
+                    <%= selectedPatient ? 'Páciens frissítése' : 'Páciens felvétele' %>
+                </button>
+            </form>
+        </div>
+    
+        <div class="patients-section">
+            <h3 style="text-align: center;">
+                Páciensek (<%= patients.length %>)
+            </h3>
+    
+            <div class="patient-list">
+                <% patients.forEach(function(patient) { %>
+                    <div class="patient-card">
+                        <h4><%= patient.name %></h4>
+                        <p>Kor: <%= patient.age %></p>
+                        <p>Neme: <%= patient.gender %></p>
+                        <div class="btn-container" style="width: 100%;">
+                            <form action="/patients/edit/<%= patient._id %>" method="GET">
+                                <button type="submit">Szerkesztés</button>
+                            </form>
+    
+                            <form action="/patients/delete/<%= patient._id %>" method="POST">
+                                <button type="submit" onclick="return confirm('Biztosan törölni szeretnéd ezt a pácienst?');">Törlés</button>
+                            </form>
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>

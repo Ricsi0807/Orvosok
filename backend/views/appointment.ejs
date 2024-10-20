@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="flex-row" style="width: 100%;">
+        <div class="flex-column">
+            <div class="add-form">
+                <h4>
+                    <% if (isEditMode) { %>
+                        Találkozó módosítása
+                    <% } else { %>
+                        Új találkozó hozzáadása
+                    <% } %>
+                </h4>
+    
+                <form class="appointment-form" method="POST" 
+                    action="<%= isEditMode ? '/appointments/update/' + selectedAppointment._id : '/appointments/add' %>">
+                    
+                    <label>Páciens neve: </label>
+                    <input type="text" name="patientName"
+                        value="<%= isEditMode ? selectedAppointment.patientName : newAppointment.patientName %>" 
+                        required />
+    
+                    <label>Orvos neve: </label>
+                    <input type="text" name="doctorName"
+                        value="<%= isEditMode ? selectedAppointment.doctorName : newAppointment.doctorName %>"
+                        required />
+    
+                    <label>Időpont: </label>
+                    <input type="date" name="date"
+                        value="<%= isEditMode ? selectedAppointment.date : newAppointment.date %>"
+                        required />
+    
+                    <button type="submit">
+                        <%= isEditMode ? 'Adatok frissítése' : 'Adatok hozzáadása' %>
+                    </button>
+                </form>
+            </div>
+        </div>
+    
+        <div class="nyito">
+            <div class="appointments">
+                <h3>Találkozó (<%= appointments.length %>)</h3>
+                <div class="appointment-list">
+                    <% appointments.forEach(function(appointment) { %>
+                        <div class="appointment-card">
+                            <p><span>Páciens: </span><%= appointment.patientName %></p>
+                            <p><span>Orvos: </span><%= appointment.doctorName %></p>
+                            <p><span>Időpont: </span><%= new Date(appointment.date).toLocaleDateString() %></p>
+    
+                            <div class="btn-container">
+                                <form action="/appointments/edit/<%= appointment._id %>" method="GET">
+                                    <button type="submit">Szerkesztés</button>
+                                </form>
+                                
+                                <form action="/appointments/delete/<%= appointment._id %>" method="POST">
+                                    <button type="submit" onclick="return confirm('Biztosan törölni szeretnéd?');">Törlés</button>
+                                </form>
+                            </div>
+                        </div>
+                    <% }) %>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>

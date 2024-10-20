@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="doctor-card">
+        <p>
+            <%= doctor.name %> - <%= doctor.specialty %>
+        </p>
+        <div class="btn-container">
+            <form action="/doctors/edit/<%= doctor._id %>" method="GET">
+                <button type="submit">Szerkesztés</button>
+            </form>
+            
+            <form action="/doctors/delete/<%= doctor._id %>" method="POST">
+                <button type="submit" onclick="return confirm('Biztosan törölni szeretnéd ezt az orvost?');">Törlés</button>
+            </form>
+        </div>
+    </div>
+    
+</body>
+</html>

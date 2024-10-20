@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <div className="nyito">
+        <div
+            className="appointment-card" >
+            <p>
+                <span>
+                    Páciens: &nbsp;
+                </span>
+                {appointment.patientName}
+            </p>
+            <p>
+                <span>
+                    Orvos: &nbsp;
+                </span>
+                {appointment.doctorName}</p>
+            <p>
+                <span>
+                    Időpont: &nbsp; 
+                </span>
+                {
+                    new Date(appointment.date)
+                        .toLocaleDateString()
+                }
+            </p>
+            <div className='btn-container'>
+                <button onClick={
+                    () =>
+                        onEdit(appointment)
+                }>
+                    Szerkesztés
+                </button>
+                <button onClick={
+                    () =>
+                        onDelete(appointment._id)
+                }>
+                    Törlés
+                </button>
+            </div>
+
+        </div>
+        </div> -->
+        <div class="nyito">
+            <div class="appointment-card">
+                <p>
+                    <span>Páciens: &nbsp;</span>
+                    <%= appointment.patientName %>
+                </p>
+                <p>
+                    <span>Orvos: &nbsp;</span>
+                    <%= appointment.doctorName %>
+                </p>
+                <p>
+                    <span>Időpont: &nbsp;</span>
+                    <%= new Date(appointment.date).toLocaleDateString() %>
+                </p>
+                <div class="btn-container">
+                    <form action="/appointments/edit/<%= appointment._id %>" method="GET">
+                        <button type="submit">Szerkesztés</button>
+                    </form>
+                    
+                    <form action="/appointments/delete/<%= appointment._id %>" method="POST">
+                        <button type="submit" onclick="return confirm('Biztosan törölni szeretnéd?');">Törlés</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+</body>
+</html>
