@@ -33,7 +33,7 @@ const AppointmentCard =
                             .toLocaleDateString()
                     }
                 </p>
-                <div className='btn-container'>
+                {/* <div className='btn-container'>
                     <button onClick={
                         () =>
                             onEdit(appointment)
@@ -46,7 +46,7 @@ const AppointmentCard =
                     }>
                         Törlés
                     </button>
-                </div>
+                </div> */}
 
             </div>
             </div>

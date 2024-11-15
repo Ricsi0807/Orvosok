@@ -24,10 +24,12 @@ const Appointments = () => {
     useEffect(() => {
         axios
             .get(
-'http://localhost:5000/appointments')
+'http://localhost:3500/api/hospital/appointments')
             .then(
-                response =>
-                    setAppointments(response.data))
+                response =>{
+                    // console.log(response.data);
+                    setAppointments(response.data.appointment);
+                })
             .catch(
                 error =>
                     console.error('Error fetching appointments:', error)
@@ -40,13 +42,13 @@ const Appointments = () => {
 
             axios
                 .post(
-'http://localhost:5000/appointments/add', newAppointment)
+'http://localhost:3500/api/hospital/appointments/add', newAppointment)
                 .then(response => {
-                    console.log(response.data);
+                    console.log(response.data.appointment);
                     setAppointments(
                         [
                             ...appointments,
-                            response.data]);
+                            response.data.appointment]);
                     setNewAppointment(
                         {
                             patientName: '',
@@ -62,7 +64,7 @@ const Appointments = () => {
             e.preventDefault();
             axios
                 .post(
-`http://localhost:5000/appointments/update/${id}`, selectedAppointment)
+`http://localhost:3500/api/hospital/appointments/update/${id}`, selectedAppointment)
                 .then(response => {
                     console.log(response.data);
                     const updateApp = {
@@ -88,7 +90,7 @@ const Appointments = () => {
         (id) => {
             axios
                 .delete(
-`http://localhost:5000/appointments/delete/${id}`)
+`http://localhost:3500/api/hospital/appointments/delete/${id}`)
                 .then(response => {
                     console.log(response.data);
                     setAppointments(
@@ -195,7 +197,7 @@ const Appointments = () => {
                     </form>
                 </div>
             </div>
-            <div className="nyito">
+            {/* <div className="nyito">
             <div className='appointments'>
                 <h3>Találkozó
                     (
@@ -206,15 +208,15 @@ const Appointments = () => {
                 <div className="appointment-list">
                     {appointments.map(appointment => (
                         <AppointmentCard
-                            key={appointment._id}
-                            appointment={appointment}
+                            key={appointment._id} 
+                            appointment={appointment} 
                             onEdit={handleEditAppointment}
                             onDelete={handleDeleteAppointment}
                         />
                     ))}
                 </div>
             </div>
-        </div>
+        </div> */}
         </div>
     );
 };

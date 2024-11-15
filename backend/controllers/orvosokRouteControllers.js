@@ -1,12 +1,11 @@
 const path = require('node:path');
-const Doctor = require('../models/Doctor');
+const Orvosok = require('../models/Doctor');
 
 exports.getOrvosok = async (req, res) => {
     try {
-        const doctors = await Doctor.find({});
+        const orvosok = await Orvosok.find({});
         // console.log(doctors);
-        const viewsUt = path.resolve(__dirname, '..', 'views', 'doctors.ejs');
-        res.status(200).render(viewsUt, { doctors });
+        res.status(200).json({ orvosok });
     } catch (error) {
         res.status(500).json({ msg: error });
     }

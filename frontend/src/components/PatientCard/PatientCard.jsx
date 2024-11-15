@@ -12,7 +12,7 @@ const PatientCard =
                 <h4>{patient.name}</h4>
                 <p>Kor: {patient.age}</p>
                 <p>Neme: {patient.gender}</p>
-                <div className='btn-container'
+                {/* <div className='btn-container'
                     style={{ width: "100%" }}>
                     <button onClick={
                         () =>
@@ -25,7 +25,7 @@ const PatientCard =
                     }>
                         Törlés
                     </button>
-                </div>
+                </div> */}
             </div>
         );
     };

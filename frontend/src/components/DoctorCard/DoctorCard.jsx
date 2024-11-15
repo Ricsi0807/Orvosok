@@ -12,10 +12,10 @@ const DoctorCard =
         return (
             <div className="doctor-card">
                 <p>
-                    {doctor.name} -
-                    {doctor.specialty}
+                    {doctor.nev} -
+                    {doctor.szak}
                 </p>
-                <div className='btn-container'>
+                {/* <div className='btn-container'>
                     <button onClick={
                         () =>
                             onEdit(doctor)
@@ -28,7 +28,7 @@ const DoctorCard =
                     }>
                         Törlés
                     </button>
-                </div>
+                </div> */}
             </div>
         );
     };

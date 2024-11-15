@@ -3,8 +3,9 @@ const Orvos = require('../models/Doctor');
 
 exports.getEgyediOrvos = async (req, res) => {
     const parameter = req.params;
-    const egyediOrvos = await Orvos.findById(parameter.id);
-    console.log(egyediOrvos);
+    console.log(parameter);
+    const orvos = await Orvos.findById(parameter.id);
+    console.log(orvos);
 
     try {
         const viewsUt = path.resolve(
@@ -13,7 +14,7 @@ exports.getEgyediOrvos = async (req, res) => {
             'views',
             'egyediOrvos.ejs'
         );
-        res.status(200).render(viewsUt, { egyediOrvos });
+        res.status(200).render(viewsUt, { orvos });
     } catch (error) {
         res.status(500).json({ msg: error });
     }

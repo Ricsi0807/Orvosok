@@ -15,8 +15,11 @@ const Patients = () => {
 
     useEffect(
         () => {
-            axios.get('http://localhost:5000/patients')
-                .then(response => setPatients(response.data))
+            axios.get('http://localhost:3500/api/hospital/patients')
+                .then(response => {
+                    console.log(response.data);
+                    setPatients(response.data.paciensek)
+                }) 
                 .catch(error =>
                     console.error('Error fetching patients:', error));
         }, []);
@@ -27,7 +30,7 @@ const Patients = () => {
             e.preventDefault();
 
             axios.post(
-'http://localhost:5000/patients/add', newPatient)
+'http://localhost:3500/api/hospital/patients/add', newPatient)
                 .then(response => {
                     console.log(response.data);
                     setPatients([...patients, response.data]);
@@ -42,7 +45,7 @@ const Patients = () => {
             e.preventDefault();
 
             axios.post(
-`http://localhost:5000/patients/update/${id}`, selectedPatient)
+`http://localhost:3500/api/hospital/patients/update/${id}`, selectedPatient)
                 .then(response => {
                     const updatePat = {
                         ...selectedPatient,
@@ -68,7 +71,7 @@ const Patients = () => {
     const handleDeletePatient =
         (id) => {
             axios.delete(
-`http://localhost:5000/patients/delete/${id}`)
+`http://localhost:3500/api/hospital/patients/delete/${id}`)
                 .then(response => {
                     console.log(response.data);
                     setSelectedPatient(null);
@@ -89,7 +92,7 @@ const Patients = () => {
 
     return (
         <div className='patient-main  '>
-            <div className='form-sections  '>
+            {/* <div className='form-sections  '>
                 <h4>
                     {
                         isEditMode ?
@@ -178,7 +181,7 @@ const Patients = () => {
                         }
                     </button>
                 </form>
-            </div>
+            </div> */}
 
             <div className='patients-section  '>
                 <h3 style={{ textAlign: "center" }}>

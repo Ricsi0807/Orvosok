@@ -7,5 +7,5 @@ const patientSchema = new Schema({
     age: { type: Number, required: true },
     gender: { type: String, required: true },
 });
-const Patient = mongoose.model('Patient', patientSchema);
+const Patient = mongoose.model('patient', patientSchema);
 module.exports = Patient;

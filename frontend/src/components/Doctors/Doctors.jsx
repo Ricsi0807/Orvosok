@@ -23,10 +23,12 @@ const Doctors = () => {
     useEffect(
         () => {
             axios
-                .get('http://localhost:5000/doctors')
+                .get('http://localhost:3500/api/hospital/orvosok')
                 .then(
-                    response =>
-                        setDoctors(response.data))
+                    response =>{
+                    console.log(response);
+                        setDoctors(response.data.orvosok);
+                    })
                 .catch(
                     error =>
                         console.error('Error fetching doctors:', error)
@@ -38,7 +40,7 @@ const Doctors = () => {
             e.preventDefault();
             axios
                 .post(
-'http://localhost:5000/doctors/add', newDoctor)
+'http://localhost:3500/api/hospital/doctors/add', newDoctor)
                 .then(
                     response => {
                         console.log("doc", response.data);
@@ -64,7 +66,7 @@ const Doctors = () => {
             e.preventDefault();
             axios
                 .post(
-`http://localhost:5000/doctors/update/${id}`, selectedDoctor)
+`http://localhost:3500/api/hospital/doctors/update/${id}`, selectedDoctor)
                 .then(response => {
                     const updateDoc = {
                         ...selectedDoctor,
@@ -88,7 +90,7 @@ const Doctors = () => {
 
     const handleDeleteDoctor = (id) => {
         axios.delete(
-`http://localhost:5000/doctors/delete/${id}`)
+`http://localhost:3500/api/hospital/doctors/delete/${id}`)
             .then(response => {
                 console.log(response.data);
                 setDoctors(
@@ -109,7 +111,7 @@ const Doctors = () => {
 
     return (
         <div className='main-doc-container  '>
-            <div className='form-sections  '>
+            {/* <div className='form-sections  '>
                 
                 <h4>
                     {
@@ -178,7 +180,7 @@ const Doctors = () => {
                                 'Orvos felvétele'
                         }</button>
                 </form>
-            </div>
+            </div> */}
             <div className='doctors-section  '>
                 <h3>Orvosok({doctors.length}) </h3>
                 
